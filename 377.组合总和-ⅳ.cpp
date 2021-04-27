@@ -64,26 +64,39 @@
 class Solution
 {
 public:
+    //vector<int> n = vector<int>(1010, -1);
+
     int combinationSum4(vector<int> &nums, int target)
     {
-        // support variables
-        long dp[target + 1];
-        dp[0] = 1;
-        // populating dp
-        for (int i = 1; i <= target; i++)
+
+        // if (target > 0 && n[target] != -1)
+        //     return n[target];
+        // if (target < 0)
+        //     return 0;
+        // if (target == 0)
+        // {
+        //     return 1;
+        // }
+        // long long res = 0;
+        // int count = nums.size();
+        // for (int i = 0; i < count; i++)
+        // {
+        //     res += combinationSum4(nums, target - nums[i]);
+        // }
+        // n[target] = res;
+        // return res;
+        vector<unsigned int> dp(target + 1, 0);
+        //dp[0] = 1;
+        int count = nums.size();
+        for (int i = 0; i <= target; i++)
         {
-            // setting the initial value of a cell to 0
-            dp[i] = 0;
-            // updating dp[i] with all the previous combinations we can reach from there
-            for (int n : nums)
+            for (int j = 0; j < count; j++)
             {
-                if (i >= n)
-                    dp[i] += dp[i - n];
-                if (dp[i] > INT_MAX)
-                    break;
+                if (i >= nums[j])
+                    dp[i] += dp[i - nums[j]];
             }
         }
-        return dp[target];
+        return dp.back();
     }
 };
 // @lc code=end
