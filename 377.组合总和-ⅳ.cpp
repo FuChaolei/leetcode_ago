@@ -86,7 +86,7 @@ public:
         // n[target] = res;
         // return res;
         vector<unsigned int> dp(target + 1, 0);
-        //dp[0] = 1;
+        dp[0] = 1;
         int count = nums.size();
         for (int i = 0; i <= target; i++)
         {

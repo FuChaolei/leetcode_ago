@@ -51,7 +51,7 @@ public:
     {
         if (root == nullptr)
             return 0;
-        return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+        return 1 + max(maxDepth(root->left), maxDepth(root->right));
     }
 };
 // @lc code=end

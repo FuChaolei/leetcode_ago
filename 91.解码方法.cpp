@@ -87,17 +87,49 @@ class Solution
 public:
     int numDecodings(string s)
     {
-        int n = s.size();
-        if (!n || s[0] == '0')
+        if (s[0] == '0')
             return 0;
-        int f0 = 1, f1 = 1, f2, i;
-        for (i = 2; i <= n; ++i)
+        int count = s.size();
+        if (count == 1)
+            return 1;
+        if (count == 2)
         {
-            f2 = (int)(s[i - 1] != '0') * f1 + (int)((s[i - 2] == '1') || (s[i - 2] == '2' && s[i - 1] < '7')) * f0;
-            f0 = f1;
-            f1 = f2;
+            if (s[1] == '0' && s[0] != '1' && s[0] != '2')
+                return 0;
+            else if ((s[0] == '1' && s[1] != '0') || (s[0] == '2' && s[1] > '0' && s[1] <= '6'))
+            {
+                return 2;
+            }
+            else
+            {
+                return 1;
+            }
         }
-        return f1;
+        vector<int> dp(count, 0);
+        if (s[1] == '0' && (s[0] != '1' && s[0] != '2'))
+            return 0;
+        else if ((s[0] == '1' && s[1] != '0') || (s[0] == '2' && s[1] > '0' && s[1] <= '6'))
+        {
+            dp[0] = 1;
+            dp[1] = 2;
+        }
+        else
+        {
+            dp[0] = 1;
+            dp[1] = 1;
+        }
+        //int a, b;
+        cout << dp[0] << "  " << dp[1];
+        for (int i = 2; i < count; i++)
+        {
+            if (s[i] == '0' && s[i - 1] != '1' && s[i - 1] != '2')
+                return 0;
+            if (s[i] != '0')
+                dp[i] += dp[i - 1];
+            if (s[i - 1] == '1' || (s[i - 1] == '2' && s[i] <= '6'))
+                dp[i] += dp[i - 2];
+        }
+        return dp[count - 1];
     }
 };
 // @lc code=end

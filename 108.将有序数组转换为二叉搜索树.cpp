@@ -62,21 +62,23 @@
  */
 class Solution
 {
-    TreeNode *sortedArrayToBST(vector<int> &nums, int start, int end)
+public:
+    TreeNode *make_tree(vector<int> &a, int lo, int hi)
     {
-        if (end <= start)
-            return NULL;
-        int midIdx = (end + start) / 2;
-        TreeNode *root = new TreeNode(nums[midIdx]);
-        root->left = sortedArrayToBST(nums, start, midIdx);
-        root->right = sortedArrayToBST(nums, midIdx + 1, end);
-        return root;
+        if (lo > hi)
+            return nullptr;
+
+        int mid = lo + (hi - lo) / 2;
+        TreeNode *node = new TreeNode(a[mid]);
+        node->left = make_tree(a, lo, mid - 1);
+        node->right = make_tree(a, mid + 1, hi);
+        return node;
     }
 
-public:
     TreeNode *sortedArrayToBST(vector<int> &nums)
     {
-        return sortedArrayToBST(nums, 0, nums.size());
+        int count = nums.size();
+        return make_tree(nums, 0, count - 1);
     }
 };
 // @lc code=end
