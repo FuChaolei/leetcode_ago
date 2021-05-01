@@ -31,11 +31,29 @@
  */
 
 // @lc code=start
-class Solution {
+class Solution
+{
 public:
-    vector<vector<int>> combine(int n, int k) {
-
+    vector<vector<int>> res;
+    vector<int> cur;
+    vector<vector<int>> combine(int n, int k)
+    {
+        backtracking(n, k, 1);
+        return res;
+    }
+    void backtracking(int n, int k, int st)
+    {
+        if (cur.size() == k)
+        {
+            res.emplace_back(cur);
+            return;
+        }
+        for (int i = st; i <= n; i++)
+        {
+            cur.emplace_back(i);
+            backtracking(n, k, i + 1);
+            cur.pop_back();
+        }
     }
 };
 // @lc code=end
-

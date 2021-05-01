@@ -74,7 +74,7 @@ public:
         if (target == 0)
         {
             res.emplace_back(cur);
-            cur.clear();
+            //cur.clear();
             return;
         }
         for (int i = s; i < candidates.size(); ++i)
@@ -83,13 +83,13 @@ public:
                 break;
             cur.emplace_back(candidates[i]);
             dfs(candidates, target - candidates[i], i, cur, res);
-            //cur.pop_back();
-            cout << "i=" << i << endl;
-            for (int t = 0; t < cur.size(); t++)
-            {
-                cout << cur[t] << " ";
-            }
-            cout << endl;
+            cur.pop_back();
+            // cout << "i=" << i << endl;
+            // for (int t = 0; t < cur.size(); t++)
+            // {
+            //     cout << cur[t] << " ";
+            // }
+            // cout << endl;
         }
     }
 };
