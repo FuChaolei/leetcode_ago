@@ -52,11 +52,12 @@
  */
 
 // @lc code=start
-class Solution {
+class Solution
+{
 public:
-    vector<vector<string>> solveNQueens(int n) {
-
+    vector<vector<string>> solveNQueens(int n)
+    {
     }
 };
-// @lc code=end
 
+// @lc code=end
