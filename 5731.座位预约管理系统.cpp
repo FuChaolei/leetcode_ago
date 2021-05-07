@@ -71,8 +71,8 @@ public:
     //int c;
     SeatManager(int n)
     {
-        for (int i = 0; i < n; i++)
-            seats.emplace_back(1);
+        for (int i = 1; i <= n; i++)
+            seats.emplace_back(i);
         //vector<int>seats(n);
     }
 
@@ -85,9 +85,10 @@ public:
         //     {k=k+1;break;}
         //     k=k+1;}
         // return c+1;
-        int *k = upper_bound(seats.begin(), seats.end(), 0);
-        int t = k - seats;
-        seats[t] = 0;
+        //
+        pop_heap(seats.begin(), seats.end(), greater<int>());
+        int t = seats.back();
+        seats.pop_back();
         return t;
         // for (int i = 0; i < seats.size(); i++)
         // {
@@ -104,7 +105,8 @@ public:
 
     void unreserve(int seatNumber)
     {
-        seats[seatNumber - 1] = 1;
+        seats.push_back(seatNumber);
+        push_heap(seats.begin(), seats.end(), greater<int>());
         // if(k>seatNumber-1)
         //     k=seatNumber-1;
         //for(int i=0;i<seats.size();i++)

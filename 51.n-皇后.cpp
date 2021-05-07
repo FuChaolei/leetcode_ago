@@ -54,66 +54,66 @@
 // @lc code=start
 class Solution
 {
-public:
-    vector<vector<string>> solveNQueens(int n)
-    {
-        auto solutions = vector<vector<string>>();
-        auto queens = vector<int>(n, -1);
-        auto columns = unordered_set<int>();
-        auto diagonals1 = unordered_set<int>();
-        auto diagonals2 = unordered_set<int>();
-        backtrack(solutions, queens, n, 0, columns, diagonals1, diagonals2);
-        return solutions;
-    }
-
-    void backtrack(vector<vector<string>> &solutions, vector<int> &queens, int n, int row, unordered_set<int> &columns, unordered_set<int> &diagonals1, unordered_set<int> &diagonals2)
+private:
+    vector<vector<string>> result;
+    void backtracking(int n, int row, vector<string> &chessboard)
     {
         if (row == n)
         {
-            vector<string> board = generateBoard(queens, n);
-            solutions.push_back(board);
+            result.push_back(chessboard);
+            return;
         }
-        else
+        for (int col = 0; col < n; col++)
         {
-            for (int i = 0; i < n; i++)
+            if (isvalid(row, col, chessboard, n))
             {
-                if (columns.find(i) != columns.end())
-                {
-                    continue;
-                }
-                int diagonal1 = row - i;
-                if (diagonals1.find(diagonal1) != diagonals1.end())
-                {
-                    continue;
-                }
-                int diagonal2 = row + i;
-                if (diagonals2.find(diagonal2) != diagonals2.end())
-                {
-                    continue;
-                }
-                queens[row] = i;
-                columns.insert(i);
-                diagonals1.insert(diagonal1);
-                diagonals2.insert(diagonal2);
-                backtrack(solutions, queens, n, row + 1, columns, diagonals1, diagonals2);
-                queens[row] = -1;
-                columns.erase(i);
-                diagonals1.erase(diagonal1);
-                diagonals2.erase(diagonal2);
+                chessboard[row][col] = 'Q';
+                backtracking(n, row + 1, chessboard);
+                chessboard[row][col] = '.';
             }
         }
     }
-
-    vector<string> generateBoard(vector<int> &queens, int n)
+    bool isvalid(int row, int col, vector<string> &chessboard, int n)
     {
-        auto board = vector<string>();
-        for (int i = 0; i < n; i++)
+        int count = 0;
+        for (int i = 0; i < row; i++)
         {
-            string row = string(n, '.');
-            row[queens[i]] = 'Q';
-            board.push_back(row);
+            if (chessboard[i][col] == 'Q')
+            {
+                return false;
+            }
         }
-        return board;
+        for (int i = 0; i < row; i++)
+        {
+            if (chessboard[i][col] == 'Q')
+            {
+                return false;
+            }
+        }
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
+        {
+            if (chessboard[i][j] == 'Q')
+            {
+                return false;
+            }
+        }
+        for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++)
+        {
+            if (chessboard[i][j] == 'Q')
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+public:
+    vector<vector<string>> solveNQueens(int n)
+    {
+        result.clear();
+        vector<string> chessboard(n, string(n, '.'));
+        backtracking(n, 0, chessboard);
+        return result;
     }
 };
 
