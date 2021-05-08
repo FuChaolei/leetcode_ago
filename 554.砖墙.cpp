@@ -57,37 +57,22 @@ class Solution
 public:
     int leastBricks(vector<vector<int>> &wall)
     {
-        vector<vector<int>> feng(10000);
-        int count = wall.size();
-        for (int i = 0; i < count; i++)
+        unordered_map<int, int> umap;
+        for (auto row : wall)
         {
-            int res = wall[i][0];
-            for (int j = 0; j < wall[i].size(); j++)
+            int sum = 0;
+            for (int i = 0; i < row.size() - 1; i++)
             {
-                feng[i].emplace_back(res);
-                res += wall[i][j];
+                sum += row[i];
+                umap[sum]++;
             }
-            feng[i].emplace_back(res);
         }
-        vector<int> fre(10000, 0);
-        for (int i = 0; i < count; i++)
+        int as = 0;
+        for (auto u : umap)
         {
-            //int res = wall[i][0];
-            for (int j = 0; j < wall[i].size(); j++)
-            {
-                fre[feng[i][j]]++;
-                //res += wall[i][j];
-            }
-            //feng.emplace_back(res);
+            as = max(as, u.second);
         }
-        for (int i = 0; i < 100; i++)
-        {
-            cout << fre[i] << " ";
-        }
-
-        int maxPosition = max_element(fre.begin(), fre.end()) - fre.begin();
-        //cout << fre[maxPosition];
-        return count - fre[maxPosition];
+        return wall.size() - as;
     }
 };
 // @lc code=end
