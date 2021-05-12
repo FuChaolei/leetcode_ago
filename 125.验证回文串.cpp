@@ -32,11 +32,27 @@
  */
 
 // @lc code=start
-class Solution {
+class Solution
+{
 public:
-    bool isPalindrome(string s) {
-
+    bool isPalindrome(string s)
+    {
+        string ss;
+        for (int i = 0; i < s.size(); i++)
+        {
+            if (!isalpha(s[i]) && !isdigit(s[i]))
+                continue;
+            else if (s[i] >= 'A' && s[i] <= 'Z')
+                ss += tolower(s[i]);
+            else
+            {
+                ss += s[i];
+            }
+        }
+        string t = ss;
+        cout << ss;
+        reverse(ss.begin(), ss.end());
+        return ss == t;
     }
 };
 // @lc code=end
-

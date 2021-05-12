@@ -37,11 +37,34 @@
  */
 
 // @lc code=start
-class Solution {
-public:
-    vector<vector<int>> combinationSum3(int k, int n) {
+class Solution
+{
+    vector<vector<int>> result;
+    vector<int> path;
+    void backtrcking(int start, int k, int n, int sum)
+    {
+        if (sum > n)
+            return;
+        if (path.size() == k && sum == n)
+        {
+            result.emplace_back(path);
+            return;
+        }
+        for (int i = start; i <= 9 - (k - path.size()) + 1; i++)
+        {
+            sum += i;
+            path.emplace_back(i);
+            backtrcking(i + 1, k, n, sum);
+            path.pop_back();
+            sum -= i;
+        }
+    }
 
+public:
+    vector<vector<int>> combinationSum3(int k, int n)
+    {
+        backtrcking(1, k, n, 0);
+        return result;
     }
 };
 // @lc code=end
-
