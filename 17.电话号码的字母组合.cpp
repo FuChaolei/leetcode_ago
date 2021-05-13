@@ -54,11 +54,35 @@
  */
 
 // @lc code=start
-class Solution {
-public:
-    vector<string> letterCombinations(string digits) {
+class Solution
+{
+private:
+    vector<string> a{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    vector<string> res;
+    string path;
+    void backtrcking(string &digits, int n)
+    {
+        if (n == digits.size())
+        {
+            res.emplace_back(path);
+            return;
+        }
+        //cout << a[digits[n] - '0'].size();
+        for (int i = 0; i < a[digits[n] - '0'].size(); i++)
+        {
+            path += a[digits[n] - '0'][i];
+            backtrcking(digits, n + 1);
+            path.pop_back();
+        }
+    }
 
+public:
+    vector<string> letterCombinations(string digits)
+    {
+        if (digits.size() == 0)
+            return res;
+        backtrcking(digits, 0);
+        return res;
     }
 };
 // @lc code=end
-
