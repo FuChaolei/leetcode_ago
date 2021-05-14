@@ -48,11 +48,43 @@
  */
 
 // @lc code=start
-class Solution {
-public:
-    vector<string> findItinerary(vector<vector<string>>& tickets) {
+class Solution
+{
+private:
+    vector<string> result;
+    unordered_map<string, map<string, int>> targets;
+    bool backtracking(int ticketNum)
+    {
+        if (result.size() == ticketNum + 1)
+        {
+            return true;
+        }
+        for (pair<const string, int> &target : targets[result[result.size() - 1]])
+        {
+            if (target.second > 0)
+            { // 使用int字段来记录到达城市是否使用过了
+                result.push_back(target.first);
+                target.second--;
+                if (backtracking(ticketNum))
+                    return true;
+                result.pop_back();
+                target.second++;
+            }
+        }
+        return false;
+    }
 
+public:
+    vector<string> findItinerary(vector<vector<string>> &tickets)
+    {
+        for (const vector<string> &vec : tickets)
+        {
+            targets[vec[0]][vec[1]]++;
+        }
+        result.emplace_back("JFK");
+        backtracking(tickets.size());
+        return result;
     }
 };
-// @lc code=end
 
+// @lc code=end
