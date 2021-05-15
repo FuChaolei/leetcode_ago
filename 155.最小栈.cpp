@@ -60,36 +60,41 @@ class MinStack
 {
 public:
     /** initialize your data structure here. */
-    vector<int> n;
+
     MinStack()
     {
     }
 
     void push(int val)
     {
-        n.emplace_back();
+        if (n.size() == 0)
+        {
+            n.push({val, val});
+        }
+        else
+        {
+            n.push({val, min(val, n.top().second)});
+            //st.push({x, min(x, st.top().second)});
+        }
     }
 
     void pop()
     {
-        n.erase(n.end());
+        n.pop();
     }
 
     int top()
     {
-        return n.back();
+        return n.top().first;
     }
 
     int getMin()
     {
-        //vector<int> b;
-        //b = n;
-        //sort(b.begin(), b.end());
-        int minPosition = min_element(n.begin(), n.end()) - n.begin();
-        int k = n[minPosition];
-        n.erase(minPosition);
-        return k;
+        return n.top().second;
     }
+
+private:
+    stack<pair<int, int>> n;
 };
 
 /**

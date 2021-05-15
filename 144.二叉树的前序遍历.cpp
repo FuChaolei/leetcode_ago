@@ -1,19 +1,19 @@
 /*
- * @lc app=leetcode.cn id=94 lang=cpp
+ * @lc app=leetcode.cn id=144 lang=cpp
  *
- * [94] 二叉树的中序遍历
+ * [144] 二叉树的前序遍历
  *
- * https://leetcode-cn.com/problems/binary-tree-inorder-traversal/description/
+ * https://leetcode-cn.com/problems/binary-tree-preorder-traversal/description/
  *
  * algorithms
- * Easy (75.37%)
- * Likes:    947
+ * Medium (69.71%)
+ * Likes:    566
  * Dislikes: 0
- * Total Accepted:    424.9K
- * Total Submissions: 563.8K
+ * Total Accepted:    316.8K
+ * Total Submissions: 454.4K
  * Testcase Example:  '[1,null,2,3]'
  *
- * 给定一个二叉树的根节点 root ，返回它的 中序 遍历。
+ * 给你二叉树的根节点 root ，返回它节点值的 前序 遍历。
  * 
  * 
  * 
@@ -21,7 +21,7 @@
  * 
  * 
  * 输入：root = [1,null,2,3]
- * 输出：[1,3,2]
+ * 输出：[1,2,3]
  * 
  * 
  * 示例 2：
@@ -42,7 +42,7 @@
  * 
  * 
  * 输入：root = [1,2]
- * 输出：[2,1]
+ * 输出：[1,2]
  * 
  * 
  * 示例 5：
@@ -63,7 +63,7 @@
  * 
  * 
  * 
- * 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
+ * 进阶：递归算法很简单，你可以通过迭代算法完成吗？
  * 
  */
 
@@ -82,34 +82,37 @@
 class Solution
 {
 public:
+    //递归
     // vector<int> res;
-    // vector<int> inorderTraversal(TreeNode *root)
+    // vector<int> preorderTraversal(TreeNode *root)
     // {
     //     if (root == nullptr)
     //         return res;
-    //     inorderTraversal(root->left);
     //     res.emplace_back(root->val);
-    //     inorderTraversal(root->right);
+    //     preorderTraversal(root->left);
+    //     preorderTraversal(root->right);
     //     return res;
     // }
-    vector<int> inorderTraversal(TreeNode *root)
+    //迭代
+    vector<int> preorderTraversal(TreeNode *root)
     {
         stack<TreeNode *> st;
         vector<int> res;
-        TreeNode *cur = root;
-        while (cur != nullptr || !st.empty())
+        if (root == nullptr)
         {
-            if (cur != nullptr)
+            return res;
+        }
+        st.push(root);
+        while (!st.empty())
+        {
+            TreeNode *node = st.top();
+            st.pop();
+            res.emplace_back(node->val);
+            if (node->right)
+                st.push(node->right);
+            if (node->left)
             {
-                st.push(cur);
-                cur = cur->left;
-            }
-            else
-            {
-                cur = st.top();
-                st.pop();
-                res.emplace_back(cur->val);
-                cur = cur->right;
+                st.push(node->left);
             }
         }
         return res;
