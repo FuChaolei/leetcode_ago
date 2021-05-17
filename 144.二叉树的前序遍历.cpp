@@ -114,6 +114,7 @@ public:
             {
                 st.push(node->left);
             }
+            //st.pop();
         }
         return res;
     }

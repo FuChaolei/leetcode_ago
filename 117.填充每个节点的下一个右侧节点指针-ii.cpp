@@ -1,19 +1,19 @@
 /*
- * @lc app=leetcode.cn id=116 lang=cpp
+ * @lc app=leetcode.cn id=117 lang=cpp
  *
- * [116] 填充每个节点的下一个右侧节点指针
+ * [117] 填充每个节点的下一个右侧节点指针 II
  *
- * https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/description/
+ * https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/description/
  *
  * algorithms
- * Medium (69.46%)
- * Likes:    460
+ * Medium (59.84%)
+ * Likes:    402
  * Dislikes: 0
- * Total Accepted:    117.3K
- * Total Submissions: 168.8K
- * Testcase Example:  '[1,2,3,4,5,6,7]'
+ * Total Accepted:    70.7K
+ * Total Submissions: 118K
+ * Testcase Example:  '[1,2,3,4,5,null,7]'
  *
- * 给定一个 完美二叉树 ，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：
+ * 给定一个二叉树
  * 
  * 
  * struct Node {
@@ -43,19 +43,23 @@
  * 
  * 
  * 
- * 输入：root = [1,2,3,4,5,6,7]
- * 输出：[1,#,2,3,#,4,5,6,7,#]
- * 解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B
- * 所示。序列化的输出按层序遍历排列，同一层节点由 next 指针连接，'#' 标志着每一层的结束。
- * 
+ * 输入：root = [1,2,3,4,5,null,7]
+ * 输出：[1,#,2,3,#,4,5,7,#]
+ * 解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B 所示。序列化输出按层序遍历顺序（由 next
+ * 指针连接），'#' 表示每层的末尾。
  * 
  * 
  * 
  * 提示：
  * 
  * 
- * 树中节点的数量少于 4096
- * -1000 
+ * 树中的节点数小于 6000
+ * -100 
+ * 
+ * 
+ * 
+ * 
+ * 
  * 
  * 
  */
