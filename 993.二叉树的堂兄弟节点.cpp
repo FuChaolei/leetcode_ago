@@ -80,23 +80,70 @@ public:
         queue<TreeNode *> q;
         if (root != nullptr)
             q.push(root);
+        int t = 0;
+        int flag = 0;
         while (!q.empty())
         {
+            vector<int> cur;
             int count = q.size();
-
+            t++;
             for (int i = 0; i < count; i++)
             {
                 if (q.front()->left)
                 {
-                    q.push(q.front());
+                    q.push(q.front()->left);
                 }
                 if (q.front()->right)
                 {
-                    q.push(q.front());
+                    q.push(q.front()->right);
                 }
-                if ()
+                cur.emplace_back(q.front()->val);
+                q.pop();
+            }
+            if (find(cur.begin(), cur.end(), x) != cur.end() && find(cur.begin(), cur.end(), y) != cur.end())
+            {
+                flag = 1;
+                break;
             }
         }
+        t--;
+        if (flag == 0)
+            return false;
+        while (!q.empty())
+            q.pop();
+        q.push(root);
+        while (!q.empty())
+        {
+            int count = q.size();
+            if (--t)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    if (q.front()->left)
+                    {
+                        q.push(q.front()->left);
+                    }
+                    if (q.front()->right)
+                    {
+                        q.push(q.front()->right);
+                    }
+                    q.pop();
+                }
+            }
+            else
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    cout << q.front()->val << endl;
+                    if ((q.front()->left != nullptr && q.front()->right != nullptr) && ((q.front()->left->val == x && q.front()->right->val == y) || (q.front()->left->val == y && q.front()->right->val == x)))
+                        return false;
+                    q.pop();
+                }
+                break;
+            }
+        }
+
+        return true;
     }
 };
 // @lc code=end
