@@ -75,7 +75,7 @@ public:
             return false;
         if (leftSymmetricNode->val == rightSymmetricNode->val)
             return checkSymmetric(leftSymmetricNode->left, rightSymmetricNode->right) && checkSymmetric(leftSymmetricNode->right, rightSymmetricNode->left);
-        return true;
+        return false;
     }
 };
 // @lc code=end
