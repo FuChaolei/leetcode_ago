@@ -73,16 +73,46 @@
 class Solution
 {
 public:
-    int res = 0;
+    //int res = 0;
+    int k = 0;
     int countNodes(TreeNode *root)
     {
-        if (root)
-        {
-            res++;
-            countNodes(root->left);
-            countNodes(root->right);
+        // {
+        //     if (root)
+        //     {
+        //         res++;
+        //         countNodes(root->left);
+        //         countNodes(root->right);
+        //     }
+        //     return res;
+        if (root == nullptr)
+            return 0;
+        TreeNode *left = root->left;
+        TreeNode *right = root->right;
+        int leftHeight = 0, rightHeight = 0; // 这里初始为0是有目的的，为了下面求指数方便
+        while (left)
+        { // 求左子树深度
+            left = left->left;
+            leftHeight++;
         }
-        return res;
+        //cout << leftHeight << endl;
+        while (right)
+        { // 求右子树深度
+            right = right->right;
+            rightHeight++;
+        }
+        if (leftHeight == rightHeight)
+        {
+            //cout << leftHeight << endl;
+            int t = (2 << leftHeight) - 1;
+            cout << (2 << leftHeight);
+            return t; // 注意(2<<1) 相当于2^2，所以leftHeight初始为0
+        }
+        k = countNodes(root->left) + countNodes(root->right) + 1;
+        //cout << k;
+        // if (root->val == 1 && root->left->val == 2 && root->right == nullptr)
+        //     return 0;
+        return k;
     }
 };
 // @lc code=end
