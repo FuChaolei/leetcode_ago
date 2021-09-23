@@ -43,11 +43,36 @@
  */
 
 // @lc code=start
-class Solution {
+class Solution
+{
 public:
-    vector<vector<int>> imageSmoother(vector<vector<int>>& M) {
-
+    vector<vector<int>> imageSmoother(vector<vector<int>> &M)
+    {
+        vector<vector<int>> N;
+        N = M;
+        vector<int> x{0, 1, -1, 0, 1, 1, -1, -1};
+        vector<int> y{1, 0, 0, -1, 1, -1, 1, -1};
+        for (int i = 0; i < M.size(); i++)
+        {
+            for (int j = 0; j < M.back().size(); j++)
+            {
+                int sum = M[i][j];
+                int count = 1;
+                for (int k = 0; k < 8; k++)
+                {
+                    int xx = i + x[k];
+                    int yy = j + y[k];
+                    if (xx >= 0 && xx < M.size() && yy >= 0 && yy < M[0].size())
+                    {
+                        sum += M[xx][yy];
+                        count++;
+                    }
+                }
+                N[i][j] = sum / count;
+                cout << N[i][j] << endl;
+            }
+        }
+        return N;
     }
 };
 // @lc code=end
-

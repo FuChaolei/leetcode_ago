@@ -57,45 +57,68 @@
 // @lc code=start
 class Solution
 {
+private:
+    int max1(int s, int e, vector<int> &nums)
+    {
+        int first = nums[s];
+        int second = max(nums[s + 1], nums[s]);
+        for (int i = s + 2; i < e; i++)
+        {
+            int temp = second;
+            second = max(first + nums[i], second);
+            first = temp;
+        }
+        return second;
+    }
+
 public:
     int rob(vector<int> &nums)
     {
-        int count = nums.size();
-        if (count == 0)
-            return 0;
-        if (count == 1)
+        // int count = nums.size();
+        // if (count == 0)
+        //     return 0;
+        // if (count == 1)
+        //     return nums[0];
+        // if (count == 2)
+        // {
+        //     if (nums[0] > nums[1])
+        //         return nums[0];
+        //     else
+        //     {
+        //         return nums[1];
+        //     }
+        // }
+        // int first = nums[0];
+        // int second = max(nums[0], nums[1]);
+        // int l = 0;
+        // for (int i = 2; i < count - 1; i++)
+        // {
+        //     int temp = second;
+        //     second = max(second, first + nums[i]);
+        //     first = temp;
+        // }
+        // int s1 = second;
+        // first = nums[1];
+        // second = max(nums[1], nums[2]);
+        // l = 0;
+        // for (int i = 3; i < count; i++)
+        // {
+        //     int temp = second;
+        //     second = max(second, first + nums[i]);
+        //     first = temp;
+        // }
+        // if (s1 < second)
+        //     s1 = second;
+        // return s1;
+        if (nums.size() < 1)
+            return nums.size();
+        if (nums.size() == 1)
             return nums[0];
-        if (count == 2)
-        {
-            if (nums[0] > nums[1])
-                return nums[0];
-            else
-            {
-                return nums[1];
-            }
-        }
-        int first = nums[0];
-        int second = max(nums[0], nums[1]);
-        int l = 0;
-        for (int i = 2; i < count - 1; i++)
-        {
-            int temp = second;
-            second = max(second, first + nums[i]);
-            first = temp;
-        }
-        int s1 = second;
-        first = nums[1];
-        second = max(nums[1], nums[2]);
-        l = 0;
-        for (int i = 3; i < count; i++)
-        {
-            int temp = second;
-            second = max(second, first + nums[i]);
-            first = temp;
-        }
-        if (s1 < second)
-            s1 = second;
-        return s1;
+        if (nums.size() == 2)
+            return max(nums[0], nums[1]);
+        int s1 = max1(0, nums.size() - 1, nums);
+        int s2 = max1(1, nums.size(), nums);
+        return max(s1, s2);
     }
 };
 // @lc code=end

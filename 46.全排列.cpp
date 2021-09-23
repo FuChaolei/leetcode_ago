@@ -31,31 +31,63 @@
  */
 
 // @lc code=start
+// class Solution
+// {
+// public:
+//     vector<vector<int>> permute(vector<int> &nums)
+//     {
+//         vector<vector<int>> res;
+//         vector<int> cur;
+//         dfs(nums, res, cur);
+//         return res;
+//     }
+//     void dfs(vector<int> &nums, vector<vector<int>> &res, vector<int> &cur)
+//     {
+//         if (cur.size() == nums.size())
+//         {
+//             res.emplace_back(cur);
+//             return;
+//         }
+//         for (int i = 0; i < nums.size(); i++)
+//         {
+//             if (find(cur.begin(), cur.end(), nums[i]) != cur.end())
+//                 continue;
+//             cur.emplace_back(nums[i]);
+//             dfs(nums, res, cur);
+//             cur.pop_back();
+//         }
+//     }
+// };
 class Solution
 {
 public:
-    vector<vector<int>> permute(vector<int> &nums)
+  vector<vector<int>> permute(vector<int> &nums)
+  {
+    const int n = nums.size();
+    vector<vector<int>> ans;
+    vector<int> used(n);
+    vector<int> path;
+    function<void(int)> dfs = [&](int d)
     {
-        vector<vector<int>> res;
-        vector<int> cur;
-        dfs(nums, res, cur, 0);
-        return res;
-    }
-    void dfs(vector<int> &nums, vector<vector<int>> &res, vector<int> &cur, int s)
-    {
-        if (cur.size() == nums.size())
-        {
-            res.emplace_back(cur);
-            return;
-        }
-        for (int i = 0; i < nums.size(); i++)
-        {
-            if (find(cur.begin(), cur.end(), nums[i]) != cur.end())
-                continue;
-            cur.emplace_back(nums[i]);
-            dfs(nums, res, cur, i);
-            cur.pop_back();
-        }
-    }
+      if (d == n)
+      {
+        ans.push_back(path);
+        return;
+      }
+      for (int i = 0; i < n; ++i)
+      {
+        if (used[i])
+          continue;
+        used[i] = 1;
+        path.push_back(nums[i]);
+        dfs(d + 1);
+        path.pop_back();
+        used[i] = 0;
+      }
+    };
+    dfs(0);
+    return ans;
+  }
 };
+
 // @lc code=end

@@ -1,3 +1,14 @@
 {
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "z-reader.onlineSite": "笔趣阁",
+    "files.associations": {
+        "xstring": "cpp",
+        "limits": "cpp",
+        "initializer_list": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp",
+        "type_traits": "cpp",
+        "cstdlib": "cpp",
+        "iosfwd": "cpp"
+    }
 }

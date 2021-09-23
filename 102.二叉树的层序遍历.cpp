@@ -68,7 +68,7 @@ public:
             vector<int> cur;
             //a = 0;
             int count = q.size();
-            cout << count << endl;
+            //cout << count << endl;
             for (int i = 0; i < count; i++)
             {
                 //TreeNode *node = q.front();

@@ -17,6 +17,14 @@ public:
     vector<vector<int>> reconstructQueue(vector<vector<int>> &people)
     {
         sort(people.begin(), people.end(), cmp);
+        int count = people.size();
+        for (int i = 0; i < count; i++)
+        {
+            for (int j = 0; j < 2; j++)
+                cout << people[i][j] << " ";
+            cout << endl;
+        }
+
         vector<vector<int>> que;
         for (int i = 0; i < people.size(); i++)
         {

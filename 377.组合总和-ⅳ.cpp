@@ -85,12 +85,24 @@ public:
         // }
         // n[target] = res;
         // return res;
-        vector<unsigned int> dp(target + 1, 0);
+        // vector<unsigned int> dp(target + 1, 0);
+        // dp[0] = 1;
+        // int count = nums.size();
+        // for (int i = 0; i <= target; i++)
+        // {
+        //     for (int j = 0; j < count; j++)
+        //     {
+        //         if (i >= nums[j])
+        //             dp[i] += dp[i - nums[j]];
+        //     }
+        // }
+        // return dp.back();
+        vector<unsigned int> dp(target + 1);
         dp[0] = 1;
-        int count = nums.size();
-        for (int i = 0; i <= target; i++)
+
+        for (int i = 1; i <= target; i++)
         {
-            for (int j = 0; j < count; j++)
+            for (int j = 0; j < nums.size(); j++)
             {
                 if (i >= nums[j])
                     dp[i] += dp[i - nums[j]];

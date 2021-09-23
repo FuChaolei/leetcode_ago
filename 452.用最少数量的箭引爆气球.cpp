@@ -17,24 +17,36 @@ public:
         if (points.size() == 0)
             return 0;
         sort(points.begin(), points.end(), cmp);
-        int c = 1, j;
-        int k = points[0][1];
-        for (int i = 0; i < points.size(); i++)
+        // int c = 1, j;
+        // int k = points[0][1];
+        // for (int i = 0; i < points.size(); i++)
+        // {
+
+        //     for (j = 1; j < points.size(); j++)
+        //     {
+        //         if (k < points[j][0])
+        //         {
+        //             c++;
+        //             k = points[j][1];
+
+        //             break;
+        //         }
+        //     }
+        //     i = j;
+        // }
+        // return c;
+        int res = 1;
+        int count = points.size();
+        for (int i = 1; i < count; i++)
         {
-
-            for (j = 1; j < points.size(); j++)
+            if (points[i - 1][1] < points[i][0])
+                res++;
+            else
             {
-                if (k < points[j][0])
-                {
-                    c++;
-                    k = points[j][1];
-
-                    break;
-                }
+                points[i][1] = min(points[i][1], points[i - 1][1]);
             }
-            i = j;
-        }
-        return c;
+                }
+        return res;
     }
 };
 // @lc code=end

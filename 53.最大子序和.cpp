@@ -10,7 +10,8 @@ class Solution
 public:
     int maxSubArray(vector<int> &nums)
     {
-        int max = INT32_MIN, s = 0;
+        int max = INT_MIN, s = 0;
+        
         for (int i = 0; i < nums.size(); i++)
         {
             s += nums[i];

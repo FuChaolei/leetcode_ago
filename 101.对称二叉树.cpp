@@ -64,7 +64,6 @@ public:
     {
         if (root == NULL)
             return true;
-
         return checkSymmetric(root->left, root->right);
     }
     bool checkSymmetric(TreeNode *leftSymmetricNode, TreeNode *rightSymmetricNode)

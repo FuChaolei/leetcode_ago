@@ -45,18 +45,31 @@ class Solution
 public:
     int climbStairs(int n)
     {
-        if (n == 1)
-            return 1;
-        if (n == 2)
-            return 2;
-        int f = 1, s = 2;
-        for (int i = 3; i < n + 1; i++)
+
+        // if (n == 1)
+        //     return 1;
+        // if (n == 2)
+        //     return 2;
+        // int f = 1, s = 2;
+        // for (int i = 3; i < n + 1; i++)
+        // {
+        //     int k = f + s;
+        //     f = s;
+        //     s = k;
+        // }
+        // return s;
+        vector<int> dp(n + 1);
+        dp[0] = 1;
+        vector<int> cur{1, 2};
+        for (int i = 1; i <= n; i++)
         {
-            int k = f + s;
-            f = s;
-            s = k;
+            for (int j = 0; j < cur.size(); j++)
+            {
+                if (i >= cur[j])
+                    dp[i] += dp[i - cur[j]];
+            }
         }
-        return s;
+        return dp[n];
     }
 };
 // @lc code=end

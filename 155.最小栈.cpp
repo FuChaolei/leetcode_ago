@@ -73,7 +73,8 @@ public:
         }
         else
         {
-            n.push({val, min(val, n.top().second)});
+            int temp = val > n.top().second ? n.top().second : val;
+            n.push({val,temp});
             //st.push({x, min(x, st.top().second)});
         }
     }

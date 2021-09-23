@@ -51,7 +51,6 @@ public:
         queue<TreeNode *> q;
         if (root == nullptr)
             return res;
-
         q.push(root);
         while (!q.empty())
         {

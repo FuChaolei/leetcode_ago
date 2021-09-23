@@ -1,0 +1,41 @@
+# 1 "D:\\Desktop\\leetcode\\1202.交换字符串中的元素.cpp"
+# 1 "D:\\Desktop\\leetcode//"
+# 1 "<built-in>"
+# 1 "<command-line>"
+# 1 "D:\\Desktop\\leetcode\\1202.交换字符串中的元素.cpp"
+# 111 "D:\\Desktop\\leetcode\\1202.交换字符串中的元素.cpp"
+class Solution
+{
+public:
+    string smallestStringWithSwaps(string s, vector<vector<int>> &pairs)
+    {
+        int n = s.size();
+        vector<int> p(n);
+        iota(p.begin(), p.end(), 0);
+        function<int(int)> find = [&](int x)
+        {
+            return find(x) == x ? x : p[x] = find(p[x]);
+        };
+        for (auto it : pairs)
+        {
+            p[find(it[0])] = find(it[1]);
+        }
+        vector<vector<int>> idx(n);
+        vector<string> ids(n);
+        for (int i = 0; i < n; i++)
+        {
+            int id = find(i);
+            idx[id].emplace_back(i);
+            ids[id].push_back(s[i]);
+        }
+        for (int i = 0; i < n; i++)
+        {
+            sort(ids[i].begin(), ids[i].end());
+            for (int k = 0; k < idx[i].size(); k++)
+            {
+                s[idx[i][k]] = ids[i][k];
+            }
+        }
+        return s;
+    }
+};

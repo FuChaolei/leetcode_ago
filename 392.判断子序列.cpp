@@ -1,3 +1,4 @@
+
 /*
  * @lc app=leetcode.cn id=392 lang=cpp
  *
@@ -10,10 +11,14 @@ class Solution
 public:
     bool isSubsequence(string s, string t)
     {
-        for (int i = 0; i < t.size(); i++)
+        int i, j;
+        for (i = 0, j = 0; i < s.size(), j < t.size();)
         {
-            if ()
+            if (s[i] == t[j])
+                i++;
+            j++;
         }
+        return i == s.size();
     }
 };
 // @lc code=end

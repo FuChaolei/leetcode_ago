@@ -57,13 +57,6 @@ class Solution
 public:
     TreeNode *invertTree(TreeNode *root)
     {
-        // if (root)
-        // {
-        //     swap(root->left, root->right);
-        //     invertTree(root->left);
-        //     invertTree(root->right);
-        // }
-        // return root;
         stack<TreeNode *> st;
         if (root == nullptr)
             return root;
@@ -71,23 +64,12 @@ public:
         while (!st.empty())
         {
             TreeNode *node = st.top();
-
             swap(node->left, node->right);
             st.pop();
             if (node->right)
                 st.push(node->right);
             if (node->left)
                 st.push(node->left);
-
-            //cout << st.top()->val;
-
-            // TreeNode *node = st.top(); // 中
-            // st.pop();
-            // swap(node->left, node->right);
-            // if (node->right)
-            //     st.push(node->right); // 右
-            // if (node->left)
-            //     st.push(node->left);
         }
         return root;
     }
